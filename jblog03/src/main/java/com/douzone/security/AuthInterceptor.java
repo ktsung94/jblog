@@ -50,12 +50,10 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			return false;
 		}
 
-		String id = authUser.getId();
+		String id = authUser.getId();  
 		String url = request.getRequestURI();
 		
 		String[] urlToken = url.split("/");
-		for(int i = 0; i < urlToken.length; i++)
-			System.out.println(urlToken[i]);
 		
 		if(urlToken[2].equals(id)) {
 			return true;

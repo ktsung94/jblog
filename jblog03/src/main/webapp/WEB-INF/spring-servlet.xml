@@ -11,6 +11,9 @@
    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<!-- auto proxy -->
+	<aop:aspectj-autoproxy />
+
    <!-- 서블릿 컨테이너의 디폴트 서블릿 위임 핸들러 -->
    <mvc:default-servlet-handler />
    
@@ -50,7 +53,7 @@
    </bean>
    
    <!-- mvc resources -->
-   <mvc:resources location="file:D:\jblog-upload/" mapping="/assets/image/**" />
+   <mvc:resources location="file:/jblog-upload/" mapping="/assets/image/**" />
    
    <!-- ViewResolver 설정 --> 
    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -59,6 +62,14 @@
       <property name="suffix" value=".jsp" />
    </bean>
 
+	<!-- MessageSource -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+  		 <property name="basenames">
+   	  	 <list>
+			<value>messages/messages_ko</value>
+  	  	 </list>
+   		</property>
+	</bean>
 
    <context:annotation-config />
    <context:component-scan base-package="com.douzone.jblog.controller, com.douzone.jblog.exception" />
