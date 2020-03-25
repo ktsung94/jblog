@@ -53,7 +53,7 @@
    </bean>
    
    <!-- mvc resources -->
-   <mvc:resources location="file:C:\jblog-upload/" mapping="/assets/image/**" />
+   <mvc:resources location="file:/jblog-upload/" mapping="/assets/image/**" />
    
    <!-- ViewResolver 설정 --> 
    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
