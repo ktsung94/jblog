@@ -1,4 +1,4 @@
-package com.douzone.jblog.config.web;
+package com.douzone.jblog.config;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import com.douzone.security.AuthUserHandlerMethodArgumentResolver;
 import com.douzone.security.LoginInterceptor;
 import com.douzone.security.LogoutInterceptor;
 
-@Configuration
+//@Configuration
 public class SecurityConfig extends WebMvcConfigurerAdapter {
 
 	//    <!-- validator, conversionService, messageConverter를 자동으로 등록 -->
