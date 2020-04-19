@@ -40,12 +40,20 @@ public class BlogController {
 	public JsonResult add(@PathVariable String id, @RequestBody CategoryVo categoryVo) {
 		categoryVo.setBlogId(id);
 		categoryService.insertCategory(categoryVo);
+		List<CategoryVo> list = categoryService.findAll(id);
+		for(CategoryVo vo : list) {
+			if(vo.getBlogId().equals(categoryVo.getBlogId()) && vo.getName().equals(categoryVo.getName()) && vo.getDescription().equals(categoryVo.getDescription())) {
+				categoryVo.setNo(vo.getNo());
+			}
+		}
 		return JsonResult.success(categoryVo);
 	}
 	
 	@DeleteMapping("/delete/{no}")
-	public JsonResult delete(@PathVariable("no") Long no) {
-		int result = categoryService.deleteCategory(no);
-		return JsonResult.success(result);
+	public JsonResult delete(@PathVariable("no") Long no) {		
+		if(categoryService.postCount(no) == 0 || categoryService.categoryCount(no) > 1)		
+			return JsonResult.success(categoryService.deleteCategory(no));
+
+		return JsonResult.success("false");
 	}
 }

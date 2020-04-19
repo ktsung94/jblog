@@ -155,15 +155,15 @@ public class BlogController {
 //		return "redirect:/" + id + "/admin/category";
 //	}
 
-	@Auth
-	@RequestMapping("/deleteCategory/{no}")
-	public String deleteCategoty(@PathVariable String id, @PathVariable Long no) {
-
-		if(categoryService.postCount(no) == 0 || categoryService.categoryCount(no) > 1)		
-			categoryService.deleteCategory(no);
-
-		return "redirect:/" + id + "/admin/category";
-	}
+//	@Auth
+//	@RequestMapping("/deleteCategory/{no}")
+//	public String deleteCategoty(@PathVariable String id, @PathVariable Long no) {
+//
+//		if(categoryService.postCount(no) == 0 || categoryService.categoryCount(no) > 1)		
+//			categoryService.deleteCategory(no);
+//
+//		return "redirect:/" + id + "/admin/category";
+//	}
 
 	@Auth
 	@RequestMapping("/insertPost")
