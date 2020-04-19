@@ -1,0 +1,14 @@
+<%
+	for(var i = data.length-1; i >= 0; i--) {
+		var vo = data[i];
+%>
+	<tr>
+		<td><%=data.length - i %></td>
+		<td><%=vo.name%></td>
+		<td><%=vo.postCount%></td>
+		<td><%=vo.description%></td>
+		<td><a href='' data-no='<%=vo.no%>'><img src='<%=pageContext%>'/></a></td>
+	</tr>
+<%
+	}
+%>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.douzone.jblog.dto.JsonResult;
 import com.douzone.jblog.service.BlogService;
 import com.douzone.jblog.service.CategoryService;
 import com.douzone.jblog.service.PostService;
@@ -92,20 +94,30 @@ public class BlogController {
 		return "blog/blog-admin-basic";
 	}	
 
+	//	@Auth
+	//	@RequestMapping("/admin/category")
+	//	public String adminCategory(@PathVariable String id, Model model) {
+	//		BlogVo vo = blogService.find(id);
+	//		model.addAttribute("blog", vo);
+	//		List<CategoryVo> list = categoryService.findAll(id);		
+	//
+	//		for(int i = 0; i < list.size(); i++) {
+	//			list.get(i).setPostCount(postService.findPostCount(list.get(i).getNo()));    
+	//		}
+	//
+	//		model.addAttribute("list", list);
+	//		return "blog/blog-admin-category";
+	//	}
+
+	// ajax
 	@Auth
 	@RequestMapping("/admin/category")
-	public String adminCategory(@PathVariable String id, Model model) {
+	public String adminCategory(Model model, @PathVariable String id) {
 		BlogVo vo = blogService.find(id);
 		model.addAttribute("blog", vo);
-		List<CategoryVo> list = categoryService.findAll(id);		
-
-		for(int i = 0; i < list.size(); i++) {
-			list.get(i).setPostCount(postService.findPostCount(list.get(i).getNo()));    
-		}
-
-		model.addAttribute("list", list);
 		return "blog/blog-admin-category";
 	}
+
 
 	@Auth
 	@RequestMapping("/admin/write")
@@ -134,14 +146,14 @@ public class BlogController {
 		return "redirect:/" + id;
 	}
 
-	@RequestMapping(value="/insertCategory", method = RequestMethod.POST)
-	public String insertCategoty(@PathVariable String id, @ModelAttribute CategoryVo vo) {
-
-		vo.setBlogId(id);		
-		categoryService.insertCategory(vo);
-
-		return "redirect:/" + id + "/admin/category";
-	}
+//	@RequestMapping(value="/insertCategory", method = RequestMethod.POST)
+//	public String insertCategoty(@PathVariable String id, @ModelAttribute CategoryVo vo) {
+//
+//		vo.setBlogId(id);		
+//		categoryService.insertCategory(vo);
+//
+//		return "redirect:/" + id + "/admin/category";
+//	}
 
 	@Auth
 	@RequestMapping("/deleteCategory/{no}")

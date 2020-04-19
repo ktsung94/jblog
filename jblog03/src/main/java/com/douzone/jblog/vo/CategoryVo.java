@@ -8,7 +8,7 @@ public class CategoryVo {
 	private String regDate;
 	private String blogId;
 	private int postCount;
-	
+
 	public int getPostCount() {
 		return postCount;
 	}
