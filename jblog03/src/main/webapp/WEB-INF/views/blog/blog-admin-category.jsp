@@ -40,6 +40,7 @@ var fetchList = function(){
 			
 			response.pageContext = '${pageContext.request.contextPath }/assets/images/delete.jpg';
 			
+			
 			var html = listTemplate.render(response);
 			$(".admin-cat").append(html);
 		},
@@ -49,6 +50,21 @@ var fetchList = function(){
 	});	
 }
 
+var messageBox = function(title, message, callback){
+	$("#dialog-message p").text(message);
+	$("#dialog-message")
+		.attr("title", title)
+		.dialog({
+			modal: true,
+			buttons: {
+				"확인": function() {
+					$(this).dialog( "close" );
+		        }
+			},
+			close: callback
+		});
+}
+
 // ------------------------------------------------------------------------------------------
 $(function(){
 	// ------------------- 추가 ----------------------------
@@ -56,6 +72,12 @@ $(function(){
 		event.preventDefault();
 		var vo = {};
 		vo.name = $("#category-name").val();
+		if(vo.name == ''){
+			messageBox("카테고리 추가", "카테고리명은 필수 항목 입니다.", function(){
+				$("#category-name").focus();
+			});
+			return;	
+		}
 		vo.description = $("#category-description").val();
 
 		$.ajax({
@@ -102,7 +124,7 @@ $(function(){
 					async: true,
 					type: 'delete',
 					dataType: 'json',
-					data: 'no= ' + no,
+					data: '',
 					success: function(response){
 						if(response.result != "success"){
 							console.error(response.message);
@@ -110,10 +132,11 @@ $(function(){
 						}
 						
 						if(response.data != -1){
-							$(".admin-cat a[data-no=" + response.data + "]").remove();
+							$(".admin-cat tr[data-no=" + no + "]").remove();
 							dialogDelete.dialog('close');
 							return;
 						}
+						
 					},
 					error: function(xhr, status, e){
 						console.error(status + ":" + e);
@@ -193,6 +216,9 @@ $(function(){
 				<form>
 					<input type="hidden" id="hidden-no" value="">
   				</form>
+			</div>
+			<div id="dialog-message" title="" style="display:none">
+  				<p></p>
 			</div>
 		</div>
 		<div id="footer">
