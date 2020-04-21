@@ -15,6 +15,7 @@
 		<h1 class="logo">JBlog</h1>
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<form:form modelAttribute="userVo" class="join-form" id="join-form" method="post" action="${pageContext.request.contextPath}/user/join">
+			<input value="true" type="hidden" name="define" />
 			<label class="block-label" for="name">이름</label>
 			<form:input path="name" />
 			<p style="font-weight:bold; color:#f00; text-align:left; padding: 0">
