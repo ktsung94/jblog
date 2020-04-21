@@ -15,6 +15,7 @@ import com.douzone.jblog.dto.JsonResult;
 import com.douzone.jblog.service.CategoryService;
 import com.douzone.jblog.service.PostService;
 import com.douzone.jblog.vo.CategoryVo;
+import com.douzone.security.Auth;
 
 @RestController("BlogApiController")
 @RequestMapping("/api/category")

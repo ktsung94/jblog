@@ -97,9 +97,10 @@ $(function(){
 				
 				// rendering
 				var html = listItemTemplate.render(response.data);
-				$(".admin-cat").append(html);
-				
+				$(".admin-cat").append(html);				
 				$("#admin-cat-add")[0].reset();
+				$(".admin-cat tr").remove();
+				fetchList();
 				
 			},
 			error: function(xhr, status, e){
@@ -132,11 +133,11 @@ $(function(){
 						}
 						
 						if(response.data != -1){
-							$(".admin-cat tr[data-no=" + no + "]").remove();
+							$(".admin-cat tr").remove();
+							fetchList();
 							dialogDelete.dialog('close');
 							return;
-						}
-						
+						}						
 					},
 					error: function(xhr, status, e){
 						console.error(status + ":" + e);
@@ -182,14 +183,7 @@ $(function(){
 					<li><a
 						href="${pageContext.request.contextPath}/${authUser.id}/admin/write">글작성</a></li>
 				</ul>
-				<table class="admin-cat">
-					<tr>
-						<th>번호</th>
-						<th>카테고리명</th>
-						<th>포스트 수</th>
-						<th>설명</th>
-						<th>삭제</th>
-					</tr>
+				<table class="admin-cat">					
 
 				</table>
 
