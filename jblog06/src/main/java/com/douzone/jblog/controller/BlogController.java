@@ -92,20 +92,30 @@ public class BlogController {
 		return "blog/blog-admin-basic";
 	}	
 
+	//	@Auth
+	//	@RequestMapping("/admin/category")
+	//	public String adminCategory(@PathVariable String id, Model model) {
+	//		BlogVo vo = blogService.find(id);
+	//		model.addAttribute("blog", vo);
+	//		List<CategoryVo> list = categoryService.findAll(id);		
+	//
+	//		for(int i = 0; i < list.size(); i++) {
+	//			list.get(i).setPostCount(postService.findPostCount(list.get(i).getNo()));    
+	//		}
+	//
+	//		model.addAttribute("list", list);
+	//		return "blog/blog-admin-category";
+	//	}
+
+	// ajax
 	@Auth
 	@RequestMapping("/admin/category")
-	public String adminCategory(@PathVariable String id, Model model) {
+	public String adminCategory(Model model, @PathVariable String id) {
 		BlogVo vo = blogService.find(id);
 		model.addAttribute("blog", vo);
-		List<CategoryVo> list = categoryService.findAll(id);		
-
-		for(int i = 0; i < list.size(); i++) {
-			list.get(i).setPostCount(postService.findPostCount(list.get(i).getNo()));    
-		}
-
-		model.addAttribute("list", list);
 		return "blog/blog-admin-category";
 	}
+
 
 	@Auth
 	@RequestMapping("/admin/write")
@@ -134,24 +144,24 @@ public class BlogController {
 		return "redirect:/" + id;
 	}
 
-	@RequestMapping(value="/insertCategory", method = RequestMethod.POST)
-	public String insertCategoty(@PathVariable String id, @ModelAttribute CategoryVo vo) {
+//	@RequestMapping(value="/insertCategory", method = RequestMethod.POST)
+//	public String insertCategoty(@PathVariable String id, @ModelAttribute CategoryVo vo) {
+//
+//		vo.setBlogId(id);		
+//		categoryService.insertCategory(vo);
+//
+//		return "redirect:/" + id + "/admin/category";
+//	}
 
-		vo.setBlogId(id);		
-		categoryService.insertCategory(vo);
-
-		return "redirect:/" + id + "/admin/category";
-	}
-
-	@Auth
-	@RequestMapping("/deleteCategory/{no}")
-	public String deleteCategoty(@PathVariable String id, @PathVariable Long no) {
-
-		if(categoryService.postCount(no) == 0 || categoryService.categoryCount(no) > 1)		
-			categoryService.deleteCategory(no);
-
-		return "redirect:/" + id + "/admin/category";
-	}
+//	@Auth
+//	@RequestMapping("/deleteCategory/{no}")
+//	public String deleteCategoty(@PathVariable String id, @PathVariable Long no) {
+//
+//		if(categoryService.postCount(no) == 0 || categoryService.categoryCount(no) > 1)		
+//			categoryService.deleteCategory(no);
+//
+//		return "redirect:/" + id + "/admin/category";
+//	}
 
 	@Auth
 	@RequestMapping("/insertPost")

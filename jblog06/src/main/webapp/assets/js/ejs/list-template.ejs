@@ -1,0 +1,26 @@
+<tr>
+	<th>번호</th>
+	<th>카테고리명</th>
+	<th>포스트 수</th>
+	<th>설명</th>
+	<th>삭제</th>
+</tr>
+
+<%
+	for(var i = 0; i < data.length; i++) {
+		var vo = data[data.length-i-1];
+%>
+	<tr data-no='<%=vo.no%>'>
+		<td><%=data.length-i %></td>
+		<td><%=vo.name%></td>
+		<td><%=vo.postCount%></td>
+		<td><%=vo.description%></td>
+		<% if(vo.postCount == 0) { %>
+			<td><a href='' data-no='<%=vo.no%>'><img src='<%=pageContext%>'/></a></td>
+		<%} else { %>
+			<td></td>
+		<% } %>
+	</tr>
+<%
+	}
+%>
